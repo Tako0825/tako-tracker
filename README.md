@@ -77,12 +77,12 @@ tako-tracker/
 
 ## 对外 API
 
-当前入口文件是 [index.js](file:///c:/Users/Administrator/Desktop/car-sales/tako-tracker/src/index.js)。
+当前入口文件是 [index.js](./src/index.js)。
 
 ### 创建实例
 
 ```js
-import { createTracker } from "@tako/tracker";
+import { createTracker } from "tako-tracker";
 
 const tracker = createTracker({
   endpoint: "http://localhost:3000/api/track/batch",
@@ -110,7 +110,7 @@ const tracker = createTracker({
 
 ## 事件常量
 
-当前已统一抽出事件常量，位于 [events.js](file:///c:/Users/Administrator/Desktop/car-sales/tako-tracker/src/constants/events.js)。
+当前已统一抽出事件常量，位于 [events.js](./src/constants/events.js)。
 
 示例：
 
@@ -120,7 +120,7 @@ import {
   EVENT_TYPE,
   EVENT_LEVEL,
   ERROR_KIND,
-} from "@tako/tracker";
+} from "tako-tracker";
 ```
 
 当前内置：
@@ -145,19 +145,10 @@ import {
 ---
 
 ## 当前接入方式
-
-本仓库当前还不是 npm 正式发布模式，但 Vue 项目已经切到“本地包依赖接入”。
-
-Vue 项目在 [package.json](file:///c:/Users/Administrator/Desktop/car-sales/vue/package.json) 中通过以下方式声明 SDK 依赖：
-
-```json
-"@tako/tracker": "file:../tako-tracker"
-```
-
 这样业务代码里引用 SDK 时，就可以直接使用：
 
 ```js
-import { createTracker, ERROR_KIND } from "@tako/tracker";
+import { createTracker, ERROR_KIND } from "tako-tracker";
 ```
 
 当前接入方式适合：
@@ -177,7 +168,7 @@ import { createTracker, ERROR_KIND } from "@tako/tracker";
 
 当前项目的 Vue 适配层在：
 
-- [adapter-vue/index.js](file:///c:/Users/Administrator/Desktop/car-sales/vue/src/tracker/adapter-vue/index.js)
+- [adapter-vue/index.js](../vue/src/tracker/adapter-vue/index.js)
 
 它的职责：
 
@@ -189,14 +180,14 @@ import { createTracker, ERROR_KIND } from "@tako/tracker";
 其中 SDK 能力统一从包名导入：
 
 ```js
-import { createTracker } from "@tako/tracker";
+import { createTracker } from "tako-tracker";
 ```
 
 ### 2. 在 `main.js` 中初始化
 
 当前接入位置：
 
-- [main.js](file:///c:/Users/Administrator/Desktop/car-sales/vue/src/main.js)
+- [main.js](../vue/src/main.js)
 
 调用方式：
 
@@ -223,7 +214,7 @@ tracker.attachVueRouter(router);
 
 Vue 适配层已经在：
 
-- [error-handler.js](file:///c:/Users/Administrator/Desktop/car-sales/vue/src/tracker/adapter-vue/error-handler.js)
+- [error-handler.js](../vue/src/tracker/adapter-vue/error-handler.js)
 
 中接入：
 
@@ -235,7 +226,7 @@ Vue.config.errorHandler
 错误类型常量也通过包名直接导入：
 
 ```js
-import { ERROR_KIND } from "@tako/tracker";
+import { ERROR_KIND } from "tako-tracker";
 ```
 
 ---
@@ -244,7 +235,7 @@ import { ERROR_KIND } from "@tako/tracker";
 
 当前请求封装文件：
 
-- [api/index.js](file:///c:/Users/Administrator/Desktop/car-sales/vue/src/api/index.js)
+- [api/index.js](../vue/src/api/index.js)
 
 当前接入方式是：
 
@@ -337,7 +328,7 @@ http://localhost:3000/api/track/batch
 
 当前项目里已经有一个专门的测试页面：
 
-- [TrackerTestArea.vue](file:///c:/Users/Administrator/Desktop/car-sales/vue/src/layouts/home/TrackerTestArea.vue)
+- [TrackerTestArea.vue](../vue/src/layouts/home/TrackerTestArea.vue)
 
 菜单入口：
 
@@ -407,7 +398,7 @@ http://localhost:3000/api/track/batch
 
 ## 当前版本
 
-- 包名：`@tako/tracker`
+- 包名：`tako-tracker`
 - 仓库名：`tako-tracker`
 - 当前版本：`0.1.0`
 - 当前状态：一期最小可运行原型

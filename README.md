@@ -146,18 +146,26 @@ import {
 
 ## 当前接入方式
 
-本仓库当前不是 monorepo 发布模式，而是“本地源码接入”。
+本仓库当前还不是 npm 正式发布模式，但 Vue 项目已经切到“本地包依赖接入”。
 
-Vue 项目通过以下路径直接引用 SDK 源码：
+Vue 项目在 [package.json](file:///c:/Users/Administrator/Desktop/car-sales/vue/package.json) 中通过以下方式声明 SDK 依赖：
 
-- [adapter-vue/index.js](file:///c:/Users/Administrator/Desktop/car-sales/vue/src/tracker/adapter-vue/index.js)
-- [index.js](file:///c:/Users/Administrator/Desktop/car-sales/vue/src/tracker/index.js)
+```json
+"@tako/tracker": "file:../tako-tracker"
+```
+
+这样业务代码里引用 SDK 时，就可以直接使用：
+
+```js
+import { createTracker, ERROR_KIND } from "@tako/tracker";
+```
 
 当前接入方式适合：
 
 - 一期快速验证
 - 本地联调
 - 在同仓库中同步重构 SDK 和业务项目
+- 保持未来切换到真正 npm 发布包时的调用方式一致
 
 后续如果要真正发布 npm 包，再补打包、产物目录和版本发布流程。
 
@@ -177,6 +185,12 @@ Vue 项目通过以下路径直接引用 SDK 源码：
 - 安装 Vue 错误捕获
 - 绑定 `vue-router`
 - 暴露 `Vue.prototype.$tracker`
+
+其中 SDK 能力统一从包名导入：
+
+```js
+import { createTracker } from "@tako/tracker";
+```
 
 ### 2. 在 `main.js` 中初始化
 
@@ -218,6 +232,11 @@ Vue.config.errorHandler
 ```
 
 这样组件运行时错误会由 SDK 自动捕获并上报，不需要业务代码手动调用 `trackError()`。
+错误类型常量也通过包名直接导入：
+
+```js
+import { ERROR_KIND } from "@tako/tracker";
+```
 
 ---
 
@@ -347,7 +366,7 @@ http://localhost:3000/api/track/batch
 一期当前仍有以下限制：
 
 - 仅完成 Vue 项目接入验证
-- 尚未整理为正式 npm 发布包
+- 当前为本地 `file:` 依赖，尚未整理为正式 npm 发布包
 - 尚未支持 React 适配层
 - 尚未支持原生 JS 适配层
 - 尚未实现点击埋点

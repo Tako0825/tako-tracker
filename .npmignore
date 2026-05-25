@@ -1,0 +1,11 @@
+src/
+node_modules/
+dist/
+rollup.config.js
+package-lock.json
+pnpm-lock.yaml
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+*.local
